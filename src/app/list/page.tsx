@@ -56,10 +56,16 @@ const ListPage = async () => {
   // console.log(stuff);
   return (
     <main>
-      <Container id="list" fluid className="py-3">
+      <Container id="list" fluid className="py-3 px-4">
+        {' '}
+        {/* Add px-4 for horizontal padding */}
         <Row>
-          <Col>
-            <h2>List Contacts</h2>
+          <Col className="mb-4">
+            {' '}
+            {/* Add margin-bottom to create space below */}
+            <h2 className="text-center mb-4">Contacts</h2>
+            {' '}
+            {/* Add margin-bottom to heading */}
             <Row xs={1} md={2} lg={3} className="g-4">
               {contacts.map((contact) => (
                 <Col key={`Contact-${contact.firstName}`}>
