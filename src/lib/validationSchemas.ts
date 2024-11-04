@@ -14,3 +14,12 @@ export const EditStuffSchema = Yup.object({
   condition: Yup.string().oneOf(['excellent', 'good', 'fair', 'poor']).required(),
   owner: Yup.string().required(),
 });
+
+// Define the Typescript interface for the Contact
+export interface Contact {
+  firstName: string;
+  lastName: string;
+  address: string;
+  image: string;
+  description: string;
+}
