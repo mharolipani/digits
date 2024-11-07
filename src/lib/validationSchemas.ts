@@ -15,7 +15,6 @@ export const EditStuffSchema = Yup.object({
   owner: Yup.string().required(),
 });
 
-// Define the Typescript interface for the Contact
 export interface Contact {
   firstName: string;
   lastName: string;
