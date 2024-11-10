@@ -16,6 +16,7 @@ export const EditStuffSchema = Yup.object({
 });
 
 export interface Contact {
+  id: number;
   firstName: string;
   lastName: string;
   address: string;

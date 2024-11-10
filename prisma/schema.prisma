@@ -44,7 +44,6 @@ model Stuff {
   owner     String
 }
 
-// Define the new Contact model
 model Contact {
   id          Int    @id @default(autoincrement())
   firstName   String

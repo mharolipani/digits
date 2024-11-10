@@ -4,8 +4,7 @@ import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Contact } from '@/lib/validationSchemas';
-import { EditContactSchema } from '@/lib/validationSchemas';
+import { Contact, EditContactSchema } from '@/lib/validationSchemas'; // Consolidated import
 import { editContact } from '@/lib/dbActions';
 
 const EditContactForm = ({ contact }: { contact: Contact & { id: number } }) => {
@@ -14,7 +13,7 @@ const EditContactForm = ({ contact }: { contact: Contact & { id: number } }) => 
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<Contact>({
+  } = useForm<Contact & { id: number }>({
     resolver: yupResolver(EditContactSchema),
   });
 
@@ -94,7 +93,7 @@ const EditContactForm = ({ contact }: { contact: Contact & { id: number } }) => 
                     {...register('description')}
                     defaultValue={contact.description}
                     className={`form-control ${errors.description ? 'is-invalid' : ''}`}
-                  ></textarea>
+                  />
                   <div className="invalid-feedback">{errors.description?.message}</div>
                 </Form.Group>
                 <input type="hidden" {...register('owner')} value={contact.owner} />
