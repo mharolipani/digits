@@ -51,7 +51,7 @@ const AddNoteForm = ({ contactId }: { contactId: number }) => {
                   <textarea
                     {...register('note')}
                     className={`form-control ${errors.note ? 'is-invalid' : ''}`}
-                    style={{ resize: 'none', minHeight: '100px' }}
+                    style={{ resize: 'none', minHeight: '200px' }} // Increased height
                   />
                   <div className="invalid-feedback">{errors.note?.message}</div>
                 </Form.Group>
