@@ -9,6 +9,13 @@ import { addNote } from '@/lib/dbActions';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { AddNoteSchema } from '@/lib/validationSchemas';
 
+const onSubmit = async (data: { note: string; contactId: number; owner: string }) => {
+  await addNote(data);
+  swal('Success', 'Your note has been added', 'success', {
+    timer: 2000,
+  });
+};
+
 const AddNoteForm = ({ contactId }: { contactId: number }) => {
   const { data: session, status } = useSession();
   const currentUser = session?.user?.email || '';
@@ -21,13 +28,6 @@ const AddNoteForm = ({ contactId }: { contactId: number }) => {
     resolver: yupResolver(AddNoteSchema),
   });
 
-  const onSubmit = async (data: { note: string; contactId: number; owner: string }) => {
-    await addNote(data);
-    swal('Success', 'Your note has been added', 'success', {
-      timer: 2000,
-    });
-  };
-
   if (status === 'loading') {
     return <LoadingSpinner />;
   }
@@ -39,7 +39,7 @@ const AddNoteForm = ({ contactId }: { contactId: number }) => {
   return (
     <Container className="py-3">
       <Row className="justify-content-center">
-        <Col xs={12} md={10} lg={8}>
+        <Col xs={12}>
           <Card>
             <Card.Header className="text-center">Add Timestamped Note</Card.Header>
             <Card.Body>
@@ -51,21 +51,18 @@ const AddNoteForm = ({ contactId }: { contactId: number }) => {
                   <textarea
                     {...register('note')}
                     className={`form-control ${errors.note ? 'is-invalid' : ''}`}
-                    style={{ resize: 'none', minHeight: '200px' }} // Increased height
+                    style={{ resize: 'none', minHeight: '30px', maxHeight: '90px', overflowY: 'auto' }}
+                    rows={1} // Starts with one line
                   />
                   <div className="invalid-feedback">{errors.note?.message}</div>
                 </Form.Group>
                 <Form.Group className="form-group">
                   <Row className="pt-3">
                     <Col className="d-grid gap-2">
-                      <Button type="submit" variant="primary">
-                        Submit
-                      </Button>
+                      <Button type="submit" variant="primary">Submit</Button>
                     </Col>
                     <Col className="d-grid gap-2">
-                      <Button type="button" onClick={() => reset()} variant="warning">
-                        Reset
-                      </Button>
+                      <Button type="button" onClick={() => reset()} variant="warning">Reset</Button>
                     </Col>
                   </Row>
                 </Form.Group>
